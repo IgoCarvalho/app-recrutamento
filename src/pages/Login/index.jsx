@@ -111,6 +111,7 @@ export default function Login() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disableElevation
           >
             Login
           </Button>
