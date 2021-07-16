@@ -1,36 +1,18 @@
+import { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
-import PersonIcon from '@material-ui/icons/Person';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Paper } from '@material-ui/core';
-import { useState } from 'react';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import PersonIcon from '@material-ui/icons/Person';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    padding: theme.spacing(3),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1, 0),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
+import GoogleIcon from '../../assets/icons/GoogleIcon';
+import Separator from '../../components/Separator';
+
+import { useStyles } from './styles';
 
 export default function Login() {
   const [form, setForm] = useState({
@@ -41,16 +23,15 @@ export default function Login() {
   function handleInputs(event) {
     const { name, value } = event.target;
 
-    setForm({...form, [name]: value});
+    setForm({ ...form, [name]: value });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
     console.log(form);
-
   }
-  
+
   const classes = useStyles();
 
   return (
@@ -68,19 +49,21 @@ export default function Login() {
             Entre para ter acesso aos nossos servicos.
           </Typography>
         </Box>
+
         <Button
           fullWidth
-          variant="outlined"
-          color="primary"
-          className={classes.submit}
+          classes={{
+            root: classes.googleButton,
+            startIcon: classes.googleIcon,
+          }}
+          startIcon={<GoogleIcon />}
         >
           Login com Google
         </Button>
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={handleSubmit}
-        >
+
+        <Separator text="ou use seu email" />
+
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             margin="normal"
             required
@@ -115,15 +98,13 @@ export default function Login() {
           >
             Login
           </Button>
-          <Box>
-            <Typography>
-              Novo por aqui? {' '}
-              <Link href="#" variant="body2">
-                Crie uma conta agora!
-              </Link>
-            </Typography>
-          </Box>
         </form>
+
+        <Separator text="novo por aqui?" />
+
+        <Button fullWidth variant="outlined" color="primary" className={classes.submit}>
+          Crie uma conta
+        </Button>
       </Paper>
     </Container>
   );
