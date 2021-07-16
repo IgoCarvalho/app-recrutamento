@@ -6,7 +6,7 @@ function Separator({ text }) {
   const classes = useStyles();
 
   return (
-    <Typography className={classes.separator} component="span" variant="subtitle2" color="">
+    <Typography className={classes.separator} component="span" variant="subtitle2">
       {text}
     </Typography>
   );

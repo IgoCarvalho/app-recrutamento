@@ -14,15 +14,15 @@ import Separator from '../../components/Separator';
 
 import { useStyles } from './styles';
 
-export default function Login() {
+function Cadastro() {
   const [form, setForm] = useState({
+    name: '',
     email: '',
     password: '',
   });
-
   const classes = useStyles();
   const history = useHistory();
-  
+
   function handleInputs(event) {
     const { name, value } = event.target;
 
@@ -35,10 +35,9 @@ export default function Login() {
     console.log(form);
   }
 
-  function navigateToCadastro() {
-    history.push('/cadastro')
+  function navigateToLogin() {
+    history.push('/login');
   }
-
 
   return (
     <Container component="main" maxWidth="xs">
@@ -48,10 +47,10 @@ export default function Login() {
             <PersonIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Login
+            Cadastro
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Entre para ter acesso aos nossos servicos.
+            Crie sua conta e tenha acesso aos nossos servicos.
           </Typography>
         </Box>
 
@@ -63,7 +62,7 @@ export default function Login() {
           }}
           startIcon={<GoogleIcon />}
         >
-          Login com Google
+          Entre com Google
         </Button>
 
         <Separator text="ou use seu email" />
@@ -73,11 +72,21 @@ export default function Login() {
             margin="normal"
             required
             fullWidth
+            id="name"
+            label="Nome"
+            name="name"
+            autoComplete="name"
+            value={form.name}
+            onChange={handleInputs}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             id="email"
             label="E-mail"
             name="email"
             autoComplete="email"
-            autoFocus
             value={form.email}
             onChange={handleInputs}
           />
@@ -101,22 +110,24 @@ export default function Login() {
             className={classes.submit}
             disableElevation
           >
-            Login
+            Entrar
           </Button>
         </form>
 
-        <Separator text="novo por aqui?" />
+        <Separator text="já possui uma conta?" />
 
         <Button
           fullWidth
           variant="outlined"
           color="primary"
           className={classes.submit}
-          onClick={navigateToCadastro}
+          onClick={navigateToLogin}
         >
-          Crie uma conta
+          Faça login
         </Button>
       </Paper>
     </Container>
   );
 }
+
+export default Cadastro;
