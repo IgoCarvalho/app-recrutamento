@@ -13,6 +13,8 @@ import GoogleIcon from '../../assets/icons/GoogleIcon';
 import Separator from '../../components/Separator';
 
 import { useStyles } from './styles';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export default function Login() {
   const [form, setForm] = useState({
@@ -22,7 +24,9 @@ export default function Login() {
 
   const classes = useStyles();
   const history = useHistory();
-  
+
+  const { loginWithGoogle, loginWithEmailAndPassword } = useContext(AuthContext);
+
   function handleInputs(event) {
     const { name, value } = event.target;
 
@@ -32,13 +36,16 @@ export default function Login() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(form);
+    loginWithEmailAndPassword(form);
   }
 
   function navigateToCadastro() {
-    history.push('/cadastro')
+    history.push('/cadastro');
   }
 
+  async function googleLogin() {
+    await loginWithGoogle();
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -62,6 +69,7 @@ export default function Login() {
             startIcon: classes.googleIcon,
           }}
           startIcon={<GoogleIcon />}
+          onClick={googleLogin}
         >
           Login com Google
         </Button>

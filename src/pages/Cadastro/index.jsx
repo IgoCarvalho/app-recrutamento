@@ -13,6 +13,8 @@ import GoogleIcon from '../../assets/icons/GoogleIcon';
 import Separator from '../../components/Separator';
 
 import { useStyles } from './styles';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 function Cadastro() {
   const [form, setForm] = useState({
@@ -23,6 +25,8 @@ function Cadastro() {
   const classes = useStyles();
   const history = useHistory();
 
+  const { cadastroWithEmailAndPassword } = useContext(AuthContext);
+
   function handleInputs(event) {
     const { name, value } = event.target;
 
@@ -32,7 +36,7 @@ function Cadastro() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(form);
+    cadastroWithEmailAndPassword(form)
   }
 
   function navigateToLogin() {
