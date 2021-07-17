@@ -1,24 +1,25 @@
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
-import { Paper } from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToAppRounded';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
 import CriarOcorrencia from './CriarOcorrencia';
 
 import { useStyles } from './styles';
 import ListarOcorrencias from './ListarOcorrencias';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 function Dashboard() {
   const { path, url } = useRouteMatch();
   const history = useHistory();
 
   const classes = useStyles();
+
+  const { signOut } = useContext(AuthContext);
 
   console.log({ path, url });
 
@@ -40,6 +41,9 @@ function Dashboard() {
           >
             Nova ocorrencia
           </Button>
+          <IconButton onClick={() => signOut()}>
+            <ExitToAppIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Switch>

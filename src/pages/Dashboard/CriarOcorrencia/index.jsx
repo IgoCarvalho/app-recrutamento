@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import PersonIcon from '@material-ui/icons/Person';
 import { useHistory } from 'react-router-dom';
+import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 import { useStyles } from './styles';
-import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { createOcorrencia } from '../../../services/database';
 
 export default function CriarOcorrencia() {
   const [form, setForm] = useState({
@@ -32,14 +31,12 @@ export default function CriarOcorrencia() {
     setForm({ ...form, [name]: value });
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(form);
-  }
+    const result = await createOcorrencia(form);
 
-  function navigateToCadastro() {
-    history.push('/cadastro');
+    history.push('/dashboard');
   }
 
   return (
